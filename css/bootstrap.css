@@ -6688,6 +6688,17 @@ button.close {
 #languages {
   background: #fff;
 }
+.endorse-section .form {
+  margin-top: 25px;
+  margin-bottom: 25px;
+  position: relative;
+  width: 100%;
+  display: block;
+  float: left;
+}
+.endorse-section .table {
+  margin-top: 6%;
+}
 .sprite {
   background-image: url(../img/spritesheet.png);
   background-repeat: no-repeat;
