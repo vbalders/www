@@ -1,8 +1,43 @@
 $(document).ready(function () {
 	
 	document.getElementById("form-container").style.display = "none";
-	
-	
+	var $name=document.getElementById("name");
+	$name.onkeyup = function(){
+		//console.log($name.value);
+		localStorage.setItem('name', $name.value);
+		
+	}
+	var $date=document.getElementById("date");
+	$date.onkeyup = function(){
+		//console.log($date.value);
+		localStorage.setItem('date', $date.value);
+		
+	}
+	var $company=document.getElementById("company");
+	$company.onkeyup = function(){
+		//console.log($company.value);
+		localStorage.setItem('company', $company.value);
+		
+	}
+	if(localStorage.name){
+		//console.log("working");
+		var $name=document.getElementById("name");
+		$name.value = localStorage.name;
+		
+	}
+	if(localStorage.date){
+		//console.log("working");
+		var $date=document.getElementById("date");
+		$date.value = localStorage.date;
+		
+	}
+	if(localStorage.company){
+		//console.log("working");
+		var $company=document.getElementById("company");
+		$company.value = localStorage.company;
+		
+	}
+		
 });
 
 function toggle_function(id) {
@@ -27,6 +62,7 @@ function save_data(){
 	};
 	//Array
 	var json_data=[];
+	
 	//Check if localstorage exist
 	if(localStorage.myjson_data){
 		//Grab the old data
@@ -34,22 +70,29 @@ function save_data(){
 	}
 	//Push old/new data into the Array
 	json_data.push(my_data);
+	
 	//Format propertly the json
 	localStorage.myjson_data= JSON.stringify(json_data);
+
 	//Update the table content
 	print_results();
 }
 
 function print_results(){
-	var $table=document.getElementById("data_table");
+	var $table = document.getElementById("data_table");
+	$table.innerHTML ="";
 	//Parse the local storage
-	var obj = JSON.parse(localStorage.myjson_data);
-	//Loop the content(Objects)
-	for (var i = 0; i < obj.length; i++){
-	    //add Contetn to the table
-	    $table.innerHTML += '<tr><td>'+obj[i].name+'</td>'+'<td>'+obj[i].date+'</td>'+'<td>'+obj[i].company+'</td></tr>';
-	  
+	if(localStorage.myjson_data){
+		var obj = JSON.parse(localStorage.myjson_data);
+		//Loop the content(Objects)
+		for (var i = 0; i < obj.length; i++){
+		    //add Contetn to the table
+		    $table.innerHTML += '<tr><td>'+obj[i].name+'</td>'+'<td>'+obj[i].date+'</td>'+'<td>'+obj[i].company+'</td></tr>';
+		  
+		}
+		
 	}
+	
 	
 }
 function sort_name(){
