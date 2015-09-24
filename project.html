@@ -46,7 +46,15 @@
             <li><a href="education.html">EDUCATION</a></li>
             <li><a href="experience.html">EXPERIENCE</a></li>
             <li><a href="portfolio.html">PORTFOLIO</a></li>
-            <li class="active"><a href="project.html">PROJECTS</a></li>
+            <li class="dropdown active"><a id="drop2" href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"href="project.html">PROJECTS <span class="caret"></span></a>
+            	<ul class="dropdown-menu" aria-labelledby="drop1">
+	               <li><a href="project.html?project=1">Project 1</a></li>
+	                <li><a href="project.html?project=2">Project 2</a></li>
+	                <li><a href="project.html?project=3">Project 3</a></li>
+	               <li><a href="project.html?project=4">Project 4</a></li>
+	              </ul>
+            
+            </li>
            </ul>
           <ul class="nav navbar-nav">
             <li class="dropdown">
@@ -80,7 +88,7 @@
 			</section>
   <!--THIS IS A CAROUSEL-->
 <section class="col-lg-12">
-<div id="myCarousel" class="carousel slide" data-ride="carousel">
+<div id="myCarousel" class="carousel slide" data-ride="carousel" data-interval="false"> 
   <!-- Indicators -->
   <ol class="carousel-indicators">
     <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
@@ -125,9 +133,27 @@
 	    </div>
     </div>
 		<script>
-$(document).ready(function () {
-$('.dropdown-toggle').dropdown();
-});
-</script>
+			$(document).ready(function () {
+			$('.dropdown-toggle').dropdown();
+			});
+			function check_project(){
+				var query = window.location.search.substring(1);
+				var project_id=query.slice(-1);
+				console.log(project_id);
+				
+				if(project_id==1 || project_id==2 || project_id==3 || project_id==4 ){
+					
+					$('#myCarousel').carousel(project_id -1);
+										
+				}else{
+					alert("Sorry the project that you requested doesn't exist");
+				}
+				
+				
+			}
+			check_project();
+			 
+			
+		</script>
     </body>
 </html>

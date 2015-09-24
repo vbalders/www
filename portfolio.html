@@ -47,7 +47,15 @@
             <li ><a href="education.html">EDUCATION</a></li>
             <li><a href="experience.html">EXPERIENCE</a></li>
             <li class="active"><a href="portfolio.html">PORTFOLIO</a></li>
-             <li><a href="project.html">PROJECTS</a></li>
+              <li class="dropdown "><a id="drop2" href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"href="project.html">PROJECTS <span class="caret"></span></a>
+            	<ul class="dropdown-menu" aria-labelledby="drop1">
+	                <li><a href="project.html?project=1">Project 1</a></li>
+	                <li><a href="project.html?project=2">Project 2</a></li>
+	                <li><a href="project.html?project=3">Project 3</a></li>
+	               <li><a href="project.html?project=4">Project 4</a></li>
+	              </ul>
+            
+            </li>
            </ul>
           <ul class="nav navbar-nav">
             <li class="dropdown">
@@ -100,7 +108,7 @@
 					 	<input type="text" name="company" class="form-control" id="company" placeholder="Company">
 					 </div>
 					 <div class="col-xs-3">
-					 	<button class="btn btn-md btn-primary" onclick="save_data();">Endorse</button>
+					 	<button class="btn btn-md btn-primary" data-toggle="modal" data-target="#myModal">Endorse</button>
 					 </div>
 				</div>
 		
@@ -128,10 +136,36 @@
 		<script>
 		$(document).ready(function () {
 			$('.dropdown-toggle').dropdown();
-		  
+		  	$('#close_modal').on( "click", function() {
+	
+				save_data();
+				$('#myModal').modal('hide');
+				alert("You reuqest was submitted");
+			});
 		    
 			
 		});
+	
+		
 		</script>
     </body>
+    <!-- Modal -->
+	<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+	  <div class="modal-dialog" role="document">
+	    <div class="modal-content">
+	      <div class="modal-header">
+	        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+	        <h4 class="modal-title" id="myModalLabel">Save Data</h4>
+	      </div>
+	      <div class="modal-body">
+	        <h3>Are you sure you want to summit the endorsement?</h3>
+	      </div>
+	      <div class="modal-footer">
+	        <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+	        <button id="close_modal" type="button" class="btn btn-primary" >Yes</button>
+	      </div>
+	    </div>
+	  </div>
+	</div>
+
 </html>
