@@ -186,6 +186,14 @@ function getValues(){
                  success: function( resp ) {
 	                 localStorage.myjson_data= JSON.stringify(resp);
 	                 var obj = JSON.parse(localStorage.myjson_data);
+	                 var $table=document.getElementById("data_table");
+					//Parse the local storage
+					$table.innerHTML ="";
+	                 for (var i = 0; i < obj.length; i++){
+					    //add Contetn to the table
+					    $table.innerHTML += '<tr><td>'+obj[i].name+'</td>'+'<td>'+obj[i].date+'</td>'+'<td>'+obj[i].company+'</td></tr>';
+					  
+					}
 	                 //print_results();
 				     console.log(obj);
 				  }
