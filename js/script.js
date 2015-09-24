@@ -154,10 +154,55 @@ function sort_date(){
 	  
 	}
 }
+    //console.log(localStorage.myjson_data);
+function save_data_array(){
+	var data_lab=[];
+	var obj = JSON.parse(localStorage.myjson_data);
+	//Loop the content(Objects)
+	for (var i = 0; i < obj.length; i++){
+	    //add Contetn to the table
+	    data_lab.push({
+		  id: i,
+		  name: obj[i].name,
+		  date: obj[i].date,
+		  company: obj[i].company
+		});
+	   //document.getElementById("placeholder").innerHTML=data.users[0].firstName + " " + data.users[0].lastName+" "+ data.users[0].joined;
+	   console.log(obj[i].name);
+	   console.log(obj[i].date);
+	   console.log(obj[i].company);
+	  
+	}
+	jsonTestList = JSON.stringify(data_lab);
+	//console.log(jsonTestList);
+}
+function getValues(){
+             $.ajax({
+                url: 'data.json',
+                type: 'get',
+                dataType: 'json',
+                cache: false,
+                async:true,
+                 success: function( resp ) {
+	                 localStorage.myjson_data= JSON.stringify(resp);
+	                 var obj = JSON.parse(localStorage.myjson_data);
+	                 //print_results();
+				     console.log(obj);
+				  }
+                });
+               
+ };
 //Wati to the html elemnts are ready
 setTimeout(function() {
-		// Print the content inside the table
-        print_results();
+		
+        print_results();// Print the content inside the table
     }, 1000);
     
-    //console.log(localStorage.myjson_data);
+setInterval(function(){
+    getValues(); // this will run after every 5 seconds
+}, 5000);
+
+save_data_array();
+getValues();
+
+        
