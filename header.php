@@ -1,8 +1,14 @@
+<?php
+	$url_request=$_SERVER['REQUEST_URI'];
+	$clean_url=str_replace("/", "", $url_request);
+	//echo $clean_url;
+?>
+
 <html>
     <head>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-         <link rel="apple-touch-icon" sizes="57x57" href="/img/apple-icon-57x57.png">
+        <link rel="apple-touch-icon" sizes="57x57" href="/img/apple-icon-57x57.png">
 		<link rel="apple-touch-icon" sizes="60x60" href="/img/apple-icon-60x60.png">
 		<link rel="apple-touch-icon" sizes="72x72" href="/img/apple-icon-72x72.png">
 		<link rel="apple-touch-icon" sizes="76x76" href="/img/apple-icon-76x76.png">
@@ -19,16 +25,18 @@
 		<meta name="msapplication-TileColor" content="#ffffff">
 		<meta name="msapplication-TileImage" content="/ms-icon-144x144.png">
 		<meta name="theme-color" content="#ffffff">
-        <title>Education</title>
+        <title>Home</title>
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="apple-touch-icon" href="apple-touch-icon.png">
         <link rel="stylesheet" href="css/bootstrap.css">
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
 		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+		<script src="js/script.js" type="text/javascript"></script>
     </head>
+    
     <body>
-<nav id="navbar-example" class="navbar navbar-default navbar-static">
+	<nav id="navbar-example" class="navbar navbar-default navbar-static">
       <div class="container-fluid">
         <div class="navbar-header">
           <button class="navbar-toggle collapsed" type="button" data-toggle="collapse" data-target=".bs-example-js-navbar-collapse">
@@ -43,19 +51,20 @@
         </div>
         <div class="collapse navbar-collapse bs-example-js-navbar-collapse">
 	      <ul class="nav navbar-nav">
-            <li class="active"><a href="education.html">EDUCATION</a></li>
-            <li><a href="experience.html">EXPERIENCE</a></li>
-            <li><a href="portfolio.html">PORTFOLIO</a></li>
-              <li class="dropdown "><a id="drop2" href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"href="project.html">PROJECTS <span class="caret"></span></a>
+            <li class="<?php if($clean_url=='education'){ echo "active";}?> "><a href="education">EDUCATION</a></li>
+            <li class="<?php if($clean_url=='experience'){ echo "active";} ?>"><a href="experience">EXPERIENCE</a></li>
+            <li class="<?php if($clean_url=='portfolio'){ echo "active";}?>"><a href="portfolio">PORTFOLIO</a></li>
+              <li class="dropdown <?php if($clean_url=='project'){ echo "active";}?> "><a id="drop2" href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"href="project">PROJECTS <span class="caret"></span></a>
             	<ul class="dropdown-menu" aria-labelledby="drop1">
-	                <li><a href="project.html?project=1">Project 1</a></li>
-	                <li><a href="project.html?project=2">Project 2</a></li>
-	                <li><a href="project.html?project=3">Project 3</a></li>
-	               <li><a href="project.html?project=4">Project 4</a></li>
+	                <li><a href="project?project=1">Project 1</a></li>
+	                <li><a href="project?project=2">Project 2</a></li>
+	                <li><a href="project?project=3">Project 3</a></li>
+	               <li><a href="project?project=4">Project 4</a></li>
 	              </ul>
             
             </li>
-           </ul>
+              <li class="<?php if($clean_url=='contact'){ echo "active";}?> "><a href="contact">CONTACT</a></li>
+	      </ul>
           <ul class="nav navbar-nav">
             <li class="dropdown">
               <a id="drop1" href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
@@ -73,29 +82,12 @@
             </li>
             
           </ul>
-     
+		     <ul class="nav navbar-nav">
+		
+            <?php if(isset($_SESSION['username'])): ?>
+              <li><a href="logout" style="color: black;">LOGOUT</a></li>
+             <?php endif;?>
+           </ul>
         </div><!-- /.nav-collapse -->
       </div><!-- /.container-fluid -->
     </nav>
-    <div class="container">
-	    <div class="row">
-		    <section class="col-lg-12">
-			    <h2><span class="sprite st-276"></span>Education</h2>
-		    </section>
-		    <section class="col-xs-12 col-md-6">
-			    <h3>Brigham Young University</h3>
-			    <p>Web design is my passion. I've had over three years' experience working as a web designer at the McKay School of Education. I love web design.</p>
-			</section>
-			<section class="col-xs-12 col-md-6">
-				 <h3><span class="gray_sub">Brigham Young University</span></h3>
-			    <p>Web design is my passion. I've had over three years' experience working as a web designer at the McKay School of Education. I love web design.</p>
-			</section>
-	    </div>
-    </div>
-		<script>
-$(document).ready(function () {
-$('.dropdown-toggle').dropdown();
-});
-</script>
-    </body>
-</html>

@@ -1,0 +1,154 @@
+Lab3a Instructions
+Overview
+
+Functionality
+
+Create a database to store user data.
+Hash incoming passwords
+Implement user authentication for your contact page
+Use .htaccess to customize server error messages for your users
+ 
+
+Concepts
+
+Create and use a MySQL database
+Authenticate users using sessions and cookies
+Change a server's configuration to meet your own specific needs
+Use a PHP library to send emails through SMTP
+ 
+
+Technologies
+
+UML
+PHP
+MySQL
+JavaScript
+.htaccess
+ 
+
+Resources
+
+Assignments
+
+Lab Write-up Instructions
+
+References
+
+php.net - Official reference for PHP
+
+Tutorials
+
+PHP and Sessions
+
+Introduction
+
+This lab will give you the opportunity to add in some authentication using PHP and allow users to log in to your site. In lab 3b we will add a registration page and eventually we will add functionality to send emails to your email account.  This lab builds off of the previous labs (as do all of the labs), so make sure you organize your code well so you will be able to read and understand it again later.  You will also be learning how to customize server configurations with .htaccess in order to make errors more presentable to your user.  A MySQL database will be used to store all of the user authentication information.
+
+Requirements
+
+Create a UML diagram of the interaction described in the entire lab (both parts) with swim lanes before you ever start coding. Understand what's going on. If you don't understand it, ask the TAs.
+Setup your database
+Everything should already be installed for this lab from the first lab (Apache, MySQL, and PhpMyAdmin)
+Create a new database 'IT210' using either the MySQL command line or PhpMyAdmin (http://localhost/phpmyadmin)
+Create a new table 'Users' in the IT210 database
+The userId field is the primary key which is declared at the end of the field options when you make the table. It has a golden key icon. To make this really work you also need to make your ID auto-increment. To do this, edit that field and check auto_increment (A I) on that field.
+Setup the password field for a hash of the password by making it length 40.  The SHA1 hash will always return a string of length 40 even if the password is shorter or longer than that.
+When you manually insert users, select the function SHA1 for the password.  You will pass in the password as plain text and it will hash it for you.
+NOTE:  A hash function takes in a string and will return a "hash" which is a fixed length string that looks random.  The concept is with any given string, the hash function will produce the same hash result, but it is highly unlikely that any two different strings will create the same hash result.  The hash result gives no hints about what the original text is and there is no way to get it back.  Hence the term, one-way hash function.
+NOTE:  MD5 has been popular and you will find it on forums but it is considered broken.  This means people can figure out the password from the MD5 hash.
+ 
+Create a new table ‘Comments’ in the IT210 database
+The commentID field will be the primary key for this table, and the UserID field will be used to form a relation with the User table.
+Create a new MySQL User with limited privileges to be used in your code.
+Password protect your new user AND root. DO NOT use the root user for your code.
+Create a PHP file 'settings.php' which stores your database connection information in variables (user, password, server, etc). This is a config file.
+Create a simple PHP page which does a MySQL Select on your Users table. Have it include your 'settings.php' file to use those variables.
+Do the same thing to your Live Server. Phpmyadmin is already set up. Username: root; Password: chang3m3; CHANGE IT!
+Turn on PHP error reporting.  By default, PHP errors are turned off.  This means if you have a PHP error your page will not work and it won't tell you why.  This makes it very difficult to develop.  Here's how to turn it on.
+Open the PHP configuration file with sudo privileges:  /etc/php5/apache2/php.ini
+Edit the display_errors variable and make it look like so:  display_errors = On
+You will see display_errors = Off for the whole line.
+Restart apache
+Implement security for your website. (this will be used to protect certain pages):
+Make 2 PHP pages: 'login.php' and 'logout.php' (log out does not need to display anything but can forward to another page like the log in page.)
+Create a contact page in PHP. You'll add content to it in 3B. For now, just put in place holder text. Add a checker at the top of this page that checks for the session variable.
+Use a login form and process it with PHP, querying the database for the password hash of the requested user
+If valid:
+Start a session for the user (i.e. 'logged_in' = 'yes' and 'username'='joeking').
+Update the 'logged_in' variable in the database (0=no, 1=yes).
+Redirect to the Contacts page
+If not valid:
+Tell the users that the login failed in your login.php.
+If not logged in, redirect them to the login page.
+Converting from html to PHP is as easy as changing the file extension from html to PHP.
+Add a logout link to your contact page.
+Make an .htaccess file:
+Enable .htaccess on your apache2 server.
+Use .htaccess to redirect a user to a customized 404 error page.
+Use .htaccess to redirect a user to customized 401 and 403 error pages.
+Make it so a user cannot access your website from any computer in the 192.168.175 subnet in the lab.  (If you are in 375 side of the lab, you can block 192.168.165 to block the other side.)
+Extra Credit
+
+Create a PHP template to display the navbar
+Use the "active" class to appropriately highlight the proper page in the navbar PHP template
+ 
+
+Tips
+
+phpMyAdmin 404 Not Found Error
+
+For some reason, sometimes phpMyAdmin gets a 404 Not Found Error. Complete these two steps and it should start to work!
+
+ 
+
+Add the following line to the end of file /etc/apache2/apache2.conf:
+Include /etc/phpmyadmin/apache.conf
+Restart Apache by giving this command on the command line:
+sudo /etc/init.d/apache2 restart
+Why isn't my custom 403 error page showing?
+
+If you block your site and see the regular error page instead of your custom page along with the error:
+
+"Additionally, a 401 Authorization Required error was encountered while trying to use an ErrorDocument to handle the request."
+
+Then your error page is also blocked. Try putting all your error pages in a folder with another .htaccess permitting access to that folder
+
+What is u'this?'
+
+Don't worry.  All u' means is that it is a unicode string.  It won't break anything, don't try to get rid of it, just know what it is and leave it alone.
+
+Error Log
+
+If you get "Internal Server Error" check the apache log files. Simple way is to run tail /var/log/apache2/error.log which will give you the last few lines of the log (most recent).
+
+header() & start_session() functions and errors
+
+These two functions MUST come before anything is written to the output stream. This means they come before anything is echo'd or written outside of the <?php or ?> tag. This includes any white space (space, new line, etc.) outside of the <?php tag. Check the beginning of your scripts including any included scripts. The best way to think of how to use this is to put them at the top of the script as much as you can. You will get an error otherwise.
+
+Can't log in to my DB
+
+If this is your live DB, FIRST try to log in with username: root and password: chang3m3 through phpmyadmin. If this is your local DB, the username is root and you set the password when you installed MySQL. If you forgot your password and have worked hard to remember it and still can't remember, here is a link to reset your MySQL password. If that doesn't work you can reconfigure the MySQL package, which basically cleans up the configuration files and starts them fresh. Just type: "sudo dpkg-reconfigure mysql-server-5.1" It will then prompt you with a new password. Read more here.
+
+or die()
+
+For each php statement that does anything with the database you should have an or die() next to it so if it errors, you will know it. You do this by adding or die("I died here"); at the end of your php statements (before the ;). You can also print the MySQL error in the die statement. Here's an example.
+
+mysql_select_db("dbname") or die("Failed to connect to db: " . mysql_error());
+
+mysql_real_escape_string()
+
+Although it is not required, it is good to know and understand sanitizing user inputs. Whenever an input from GET or POST or whatever is being used to go into a SQL statement should be sanitized (escaped). Use this function to do that. Example...
+
+$query = "SELECT * FROM Users WHERE UserName = '". mysql_real_escape_string($_GET['name']) ."'";
+
+Weird errors?
+
+Remember the Apache error log you had to look at in lab 1, look there now. If you get a blank page with no errors or really for any other reason, go check the Apache error log.
+
+Logging to the Browser Console
+
+Miss logging to the console like you did with javascript? There are plugins that will let you print to the console from PHP, as well as other languages (So keep them in mind for later!). Two such tools are Chrome Logger and FirePHP.
+
+Runtime PHP Console
+
+PsySH is a runtime shell for PHP. This allows you to run PHP code one line at a time and see results, making it a useful tool for debugging.
