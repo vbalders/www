@@ -20,12 +20,12 @@ include_once 'settings.php';
 		// Store Session Data
 		$_SESSION['username']= $username; 
 		$_SESSION['logged_in']= 'yes'; 
-		header("location:contact");
+		header("location:contact.php");
 		
 	}
 	else {
 		//echo "Wrong Username or Password";
-		header("location:login-page?error=true");
+		header("location:login-page.php?error=true");
 	}
     
 

@@ -1,5 +1,5 @@
 <?php
-//
+session_start();
 if(isset($_SESSION['username'])){
 header("location: contact.php");
 }
@@ -17,8 +17,8 @@ if($_GET["error"]==true){
 	<div class="col-sm-6">
       <form action='login.php' method='post'>
         <h2 class="form-signin-heading">Please sign in</h2>
-        <label for="inputEmail" class="sr-only">Email address</label>
-        <input type="email" id="username" class="form-control" name="username" value=""  placeholder="Email address" required="" autofocus="">
+        <label for="inputEmail" class="sr-only">User name</label>
+        <input type="text" id="username" class="form-control" name="username" value=""  placeholder="Username" required="" autofocus="">
         <br>
         <label for="inputPassword" class="sr-only">Password</label>
         <input type="password" id="password" class="form-control" name="password" value=""  placeholder="Password" required="">

@@ -1,8 +1,8 @@
 <?php
-	
+	session_start();
 	include_once 'header.php';
 ?>
-    <div class="container">
+    <div class="container portfolio">
 	    <div class="row">
 		    <section class="col-xs-12">
 		    <h2><span class="sprite st-538"></span>Selected Work</h2>

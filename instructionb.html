@@ -1,0 +1,121 @@
+Lab3b Instructions
+Overview
+
+Functionality
+
+Use a database to store users and comments.
+Create a registration page and allow users to register for your site
+Allow users to send email messages from your contact page
+Allow user to store new endorsements in the JSON file
+ 
+Concepts
+
+Update MySQL database
+Use join queries working with multiple database tables
+Use PHP to modify files on server
+Use a PHP library to send emails through SMTP
+ 
+Technologies
+
+UML
+PHP
+MySQL
+JavaScript
+SMTP
+ 
+Resources
+
+Assignments
+
+Lab Write-up Instructions
+References
+
+JSON Skeleton
+JSON Reader for Live Server
+PHP's JSON Functions
+Tutorials
+
+Quick start tutorials
+PHP and JSON Tutorial
+Introduction
+
+This lab will allow users to register for the page. We will add functionality to send emails to your email account.  This lab builds off of the previous labs (as do all of the labs), so make sure you organize your code well so you will be able to read and understand it again later.  You will allow users to make comments on your projects page that will be stored in the database. Then display the different comments on the projects page underneath the carousel.
+
+Requirements
+
+Create a UML diagram of the interaction described in the entire lab (both parts) with swim lanes before you ever start coding. Understand what's going on. If you don't understand it, ask the TAs.
+Register new users: Create a 'register.php' page that will allow a user to create a new account on your site.
+Have a form with fields for Name, Username, Email, and 2 for password and confirmation. Make sure the password and confirmation match.
+Check to make sure that the username is unique in the database.
+If registration fails for any reason, tell the user why.  (username taken, server error)
+Update the database.
+Redirect the user to the contact page
+Contact page: Using the contact page from the previous portion of the lab, create a form that allows the user to select a subject or type one in and a field for their message that will be sent to your email address. There are  several different ways to do this, but you must use a method using PHP.
+The form should also collect the user’s email address (used to set the "reply-to") their name (added to the end of the body) and the subject.
+USE Gmail as your SMTP server
+you can use any PHP library that can implement this
+Allow logged in users to comment on projects underneath the carousel.
+Note: this is different than with the endorsements page because you will be storing the comment information using PHP in the MySQL database.
+Users that are not logged on should be able to see the comments, but not create a new comment.
+The comments will be stored in the comments table in the database using a join with the users table.
+Note: a join is when two tables are connected together by a common entity, i.e. for the users table and the comment table they are ‘joined’ by the userID column in both tables. In order for this type of join to work it must use a unique column, there can be no duplicates as to the reason why the userID is best.
+example:
+Before JOIN:
+
+User's Table
+UserID	Name
+1	Pink
+2	Flower
+3	Peaches
+ 
+
+Data Table
+User ID	Data
+2	Blah
+3	Blah Blah
+2	Bl
+1	ah
+After JOIN:
+
+Users and Data Table
+User ID	Name	Data
+1	Pink	ah
+2	Flower	Blah
+2	Flower	bl
+3	Peaches	Blah Blah
+ 
+
+The comments should be displayed with the Name of the person that made the comment and date they made it
+Add the ability to update the JSON file on the server every time a user posts an endorsement
+There are a number of ways to do this but make sure your method includes these elements:
+Make sure the JSON is still downloaded first from the server
+Use PHP to add the new endorsement to the JSON file
+Make sure the JSON file on the server is updated
+Update the JSON file by posting the form through AJAX
+Update table/div of endorsements using AJAX
+Remember this is different than the comments section for the projects page because it is using the JSON file NOT the database
+Extra credit Opportunities:
+
+Notify the user that the email was sent successfully.
+Auto populate the fields in the form with data from the database. Allow user to modify fields.
+Tips
+
+Emailing with PHP
+
+It is highly recommended that you use a well-documented PHP library to implement the email function. For example, try Pear, PHPMailer or Mandrill. Whichever you choose, make sure it is installed correctly. These libraries are not inherently in PHP, you will either need to include a folder or install the library to make it work. Read the documentation for the library you choose in order to know how to install and use it.
+
+How can you see what your cookies are doing?
+
+Add an extension to firebug called FireCookie. Do this in Firefox > Tools > Add-ons and search for FireCookie. Now you will have a tab in Firebug called "Cookies" which will let you view, edit and delete cookies in your browser.
+
+How do I...?
+
+Google will be your best friend on this lab. For example you might search "PHP write to JSON", "PHP MySQL join", "send email with pear", etc.
+
+Why isn't my JSON being written?
+
+Be sure that you have given the group www-data permission to write to the JSON file!
+
+var_dump()
+
+In PHP there is a way to nicely print out any type of variable and it is var_dump().  This means you can give it an int, string, array or object and it will print it out for you.  This can be really useful when working with the object created from your JSON.

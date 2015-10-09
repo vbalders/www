@@ -71,9 +71,23 @@ function save_data(){
 	//Push old/new data into the Array
 	json_data.push(my_data);
 	
+	console.log("Test:");
+	console.log(json_data);
+	
 	//Format propertly the json
 	localStorage.myjson_data= JSON.stringify(json_data);
-
+	var clean_data=JSON.stringify(json_data);
+    $.ajax({
+					url: "update-json.php",
+					data:{value:clean_data},
+					type: "POST",
+					dataType: 'json',
+					success:function(response){
+						
+						 
+					}
+					
+				});
 	//Update the table content
 	print_results();
 }
@@ -82,17 +96,17 @@ function print_results(){
 	var $table = document.getElementById("data_table");
 	$table.innerHTML ="";
 	//Parse the local storage
-	if(localStorage.myjson_data){
-		var obj = JSON.parse(localStorage.myjson_data);
+	/*if(localStorage.myjson_data){*/
+		/*var obj = JSON.parse('data.json');
 		//Loop the content(Objects)
 		for (var i = 0; i < obj.length; i++){
 		    //add Contetn to the table
 		    $table.innerHTML += '<tr><td>'+obj[i].name+'</td>'+'<td>'+obj[i].date+'</td>'+'<td>'+obj[i].company+'</td></tr>';
 		  
-		}
+		}*/
 		
-	}
-	
+	/*}*/
+	getValues();
 	
 }
 function sort_name(){
@@ -168,9 +182,9 @@ function save_data_array(){
 		  company: obj[i].company
 		});
 	   //document.getElementById("placeholder").innerHTML=data.users[0].firstName + " " + data.users[0].lastName+" "+ data.users[0].joined;
-	   console.log(obj[i].name);
-	   console.log(obj[i].date);
-	   console.log(obj[i].company);
+	   //console.log(obj[i].name);
+	   //console.log(obj[i].date);
+	   //console.log(obj[i].company);
 	  
 	}
 	jsonTestList = JSON.stringify(data_lab);
@@ -195,23 +209,28 @@ function getValues(){
 					  
 					}
 	                 //print_results();
-				     console.log(obj);
+				     //console.log(obj);
 				  }
                 });
                
  };
-//Wati to the html elemnts are ready
-setTimeout(function() {
-		
-        print_results();// Print the content inside the table
-    }, 1000);
-    
-setInterval(function(){
-    getValues(); // this will run after every 5 seconds
-}, 5000);
+var pathname = window.location.pathname; 
 
-save_data_array();
-getValues();
+ if(pathname=="/portfolio.php"){
+	 //Wati to the html elemnts are ready
+	setTimeout(function() {
+	     print_results();// Print the content inside the table
+	 }, 1000);
+	 setInterval(function(){
+	    getValues(); // this will run after every 5 seconds
+	}, 5000);
+	save_data_array();
+	getValues();
+	 
+ }  
+
+
+
 
 
         

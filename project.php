@@ -1,6 +1,7 @@
 <?php
-	
+	session_start();
 	include_once 'header.php';
+	include 'comments.php';
 ?>
     <div class="container">
 	    <div class="row">
@@ -12,7 +13,8 @@
 			    <p>These are my most recent projects.</p>
 			</section>
   <!--THIS IS A CAROUSEL-->
-<section class="col-lg-12">
+<section class="col-lg-2"></section>
+<section class="col-lg-8">
 <div id="myCarousel" class="carousel slide" data-ride="carousel" > 
   <!-- Indicators -->
   <ol class="carousel-indicators">
@@ -52,6 +54,31 @@
   </a>
 </div>
 </section>
+<section class="col-lg-2"></section>
+<section class="col-lg-3"></section>
+<section class="col-lg-5" style="margin-top: 15px;">
+		<?php if(!isset($_SESSION['username'])){?>
+		<p>To comment please <a href="login-page.php">login</a></p>
+		<?php }?>
+		<?php if(isset($_SESSION['username'])){?>
+		<p>Add Comment:</p>
+		<form id="update">
+			<textarea id="comments" class="form-control" rows="3" ></textarea>
+			<button id="submit" type="submit" class="btn btn-primary pull-right" style="margin-top: 10px;">Submit</button>
+		</form>
+		<?php }?>
+		<div style="clear: both;"></div>
+		<p style="margin-top: 20px;">Comment Section:</p>
+		
+		<?php while($rows = mysql_fetch_array($result)){?>
+		   <div class="single-comment">
+			   <p><b>User:</b> <?php echo $rows['name']; ?><br>
+			   <b>Comment:</b> <?php echo $rows['comment']; ?></p>
+		   </div>
+	 
+		<?php } ?>
+	
+</section>
 
 
 
@@ -75,7 +102,34 @@
 				
 			}
 			check_project();
-			 
+			 $("#update").on('submit', function (e){
+				 e.preventDefault();
+				 var $userid="<?php echo $_SESSION['username'];?>";
+				 var $comment=$("#comments").val();
+				 var form_data={
+					// Required data
+					  username : $userid
+					, comment : $comment
+				
+				}
+				var data_datastring=jQuery.param( form_data );
+				$.ajax({
+					url: "update-comment.php",
+					data:data_datastring,
+					type: "POST",
+					success:function(response){
+						if(response.message=="success"){
+							 window.location.replace("project.php");
+							 
+						 }else{
+							 alert(response.error)
+							
+						 }
+						 
+					}
+					
+				});
+			 });
 			
 		</script>
     </body>

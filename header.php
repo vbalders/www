@@ -51,19 +51,20 @@
         </div>
         <div class="collapse navbar-collapse bs-example-js-navbar-collapse">
 	      <ul class="nav navbar-nav">
-            <li class="<?php if($clean_url=='education'){ echo "active";}?> "><a href="education">EDUCATION</a></li>
-            <li class="<?php if($clean_url=='experience'){ echo "active";} ?>"><a href="experience">EXPERIENCE</a></li>
-            <li class="<?php if($clean_url=='portfolio'){ echo "active";}?>"><a href="portfolio">PORTFOLIO</a></li>
-              <li class="dropdown <?php if($clean_url=='project'){ echo "active";}?> "><a id="drop2" href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"href="project">PROJECTS <span class="caret"></span></a>
+            <li class="<?php if($clean_url=='education.php'){ echo "active";}?> "><a href="education.php">EDUCATION</a></li>
+            <li class="<?php if($clean_url=='experience.php'){ echo "active";} ?>"><a href="experience.php">EXPERIENCE</a></li>
+            <li class="<?php if($clean_url=='portfolio.php'){ echo "active";}?>"><a href="portfolio.php">PORTFOLIO</a></li>
+              <li class="dropdown <?php if($clean_url=='project.php'){ echo "active";}?> "><a id="drop2" href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"href="project">PROJECTS <span class="caret"></span></a>
             	<ul class="dropdown-menu" aria-labelledby="drop1">
-	                <li><a href="project?project=1">Project 1</a></li>
-	                <li><a href="project?project=2">Project 2</a></li>
-	                <li><a href="project?project=3">Project 3</a></li>
-	               <li><a href="project?project=4">Project 4</a></li>
+	                <li><a href="project.php?project=1">Project 1</a></li>
+	                <li><a href="project.php?project=2">Project 2</a></li>
+	                <li><a href="project.php?project=3">Project 3</a></li>
+	               <li><a href="project.php?project=4">Project 4</a></li>
 	              </ul>
             
             </li>
-              <li class="<?php if($clean_url=='contact'){ echo "active";}?> "><a href="contact">CONTACT</a></li>
+              <li class="<?php if($clean_url=='contact.php'){ echo "active";}?> "><a href="contact.php">CONTACT</a></li>
+              <li class="<?php if($clean_url=='registration-page.php'){ echo "active";}?> "><a href="registration-page.php">REGISTRATION</a></li>
 	      </ul>
           <ul class="nav navbar-nav">
             <li class="dropdown">
@@ -85,7 +86,7 @@
 		     <ul class="nav navbar-nav">
 		
             <?php if(isset($_SESSION['username'])): ?>
-              <li><a href="logout" style="color: black;">LOGOUT</a></li>
+              <li><a href="logout.php" style="color: black;">LOGOUT</a></li>
              <?php endif;?>
            </ul>
         </div><!-- /.nav-collapse -->
